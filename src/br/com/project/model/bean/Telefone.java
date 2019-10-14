@@ -1,14 +1,24 @@
 package br.com.project.model.bean;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /**
  *
  * @author Hallan
  */
+
+@Entity
 public class Telefone {
     
+    @Id
     private int id;
     private int ddd;
     private int numero;
+    
+    public Telefone(){
+        
+    }
 
     public Telefone(int id, int ddd, int numero) {
         this.id = id;

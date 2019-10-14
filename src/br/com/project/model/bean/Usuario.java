@@ -1,14 +1,22 @@
 package br.com.project.model.bean;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /**
  *
  * @author Hallan
  */
+@Entity
 public class Usuario {
-    
+    @Id
     private int id;
     private int idFuncionario;
     private String senha;
+    
+    public Usuario(){
+        
+    }
 
     public Usuario(int id, int idFuncionario, String senha) {
         this.id = id;

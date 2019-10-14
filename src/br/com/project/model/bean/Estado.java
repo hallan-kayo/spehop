@@ -1,14 +1,24 @@
 package br.com.project.model.bean;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /**
  *
  * @author Hallan
  */
+
+@Entity
 public class Estado {
     
+    @Id
     private int id;
     private String nome;
     private Cidade cidade;
+    
+    private Estado(){
+        
+    }
 
     public Estado(int id, String nome, Cidade cidade) {
         this.id = id;

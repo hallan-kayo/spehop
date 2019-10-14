@@ -1,18 +1,26 @@
 package br.com.project.model.bean;
 
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 /**
  *
  * @author Hallan
  */
+@Entity
 public class Atendimento {
     
+    @Id
     private int id;
     private int idFuncionario;
     private int idPaciente;
     private Date dataAtendimento;
     private String diagnostico;
+    
+    public Atendimento(){
+        
+    }
 
     public Atendimento(int id, int idFuncionario, int idPaciente, Date dataAtendimento, String diagnostico) {
         this.id = id;

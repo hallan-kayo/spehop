@@ -1,31 +1,39 @@
 package br.com.project.model.bean;
 
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 /**
  *
  * @author Hallan
  */
+@Entity
 public class Pessoa {
     
+    @Id
     private int id;
     private int cpf;
     private int rg;
     private String nome;
     private Date dataNascimento;
     private String classificacao;
-    private int cartaosus;
+    private int cartaoSus;
     private Endereco endereco;
     private Telefone telefone;
+    
+    public Pessoa(){
+        
+    }
 
     public Pessoa(int id, int cpf, int rg, String nome, Date dataNascimento, String classificacao, int cartaosus, Endereco endereco, Telefone telefone) {
-        this.id = id;
+        this.id = cpf;
         this.cpf = cpf;
         this.rg = rg;
         this.nome = nome;
         this.dataNascimento = dataNascimento;
         this.classificacao = classificacao;
-        this.cartaosus = cartaosus;
+        this.cartaoSus = cartaosus;
         this.endereco = endereco;
         this.telefone = telefone;
     }
@@ -79,11 +87,11 @@ public class Pessoa {
     }
 
     public int getCartaosus() {
-        return cartaosus;
+        return cartaoSus;
     }
 
     public void setCartaosus(int cartaosus) {
-        this.cartaosus = cartaosus;
+        this.cartaoSus = cartaosus;
     }
 
     public Endereco getEndereco() {
