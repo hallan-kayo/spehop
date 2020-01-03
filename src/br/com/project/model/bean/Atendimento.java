@@ -3,6 +3,7 @@ package br.com.project.model.bean;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  *
