@@ -15,10 +15,13 @@ import javax.persistence.Persistence;
  */
 public class ConnectionFactory {
     
-    private static final EntityManagerFactory entityManagerFactory = 
-            Persistence.createEntityManagerFactory("spehop");
+    private EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("spehop");
     
     public EntityManager getConnection(){
         return entityManagerFactory.createEntityManager();
+    }
+    
+    public void close(){
+        entityManagerFactory.close();
     }
 }

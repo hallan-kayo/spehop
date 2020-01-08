@@ -2,6 +2,8 @@ package br.com.project.model.bean;
 
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -10,9 +12,11 @@ import javax.persistence.Table;
  * @author Hallan
  */
 @Entity
+@Table(name = "atendimento")
 public class Atendimento {
     
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
     private int idFuncionario;
     private int idPaciente;

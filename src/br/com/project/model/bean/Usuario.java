@@ -1,26 +1,31 @@
 package br.com.project.model.bean;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  *
  * @author Hallan
  */
 @Entity
-public class Usuario {
+@Table(name = "usuario")
+public class Usuario{
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
-    private int idFuncionario;
+    private String cpf;
     private String senha;
     
     public Usuario(){
         
     }
 
-    public Usuario(int id, int idFuncionario, String senha) {
+    public Usuario(int id, String cpf, String senha) {
         this.id = id;
-        this.idFuncionario = idFuncionario;
+        this.cpf = cpf;
         this.senha = senha;
     }
 
@@ -32,12 +37,12 @@ public class Usuario {
         this.id = id;
     }
 
-    public int getIdFuncionario() {
-        return idFuncionario;
+    public String getCpf() {
+        return cpf;
     }
 
-    public void setIdFuncionario(int idFuncionario) {
-        this.idFuncionario = idFuncionario;
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     public String getSenha() {

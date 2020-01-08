@@ -1,7 +1,10 @@
 package br.com.project.model.bean;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  *
@@ -9,19 +12,20 @@ import javax.persistence.Id;
  */
 
 @Entity
+@Table(name = "telefone")
 public class Telefone {
     
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
     private int ddd;
-    private int numero;
+    private String numero;
     
     public Telefone(){
         
     }
 
-    public Telefone(int id, int ddd, int numero) {
-        this.id = id;
+    public Telefone(int ddd, String numero) {
         this.ddd = ddd;
         this.numero = numero;
     }
@@ -42,11 +46,11 @@ public class Telefone {
         this.ddd = ddd;
     }
 
-    public int getNumero() {
+    public String getNumero() {
         return numero;
     }
 
-    public void setNumero(int numero) {
+    public void setNumero(String numero) {
         this.numero = numero;
     }
 

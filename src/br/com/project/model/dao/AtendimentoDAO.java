@@ -11,4 +11,5 @@ package br.com.project.model.dao;
  */
 public class AtendimentoDAO {
     
+    
 }

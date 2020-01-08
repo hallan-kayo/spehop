@@ -1,7 +1,10 @@
 package br.com.project.model.bean;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  *
@@ -9,9 +12,11 @@ import javax.persistence.Id;
  */
 
 @Entity
+@Table(name = "estado")
 public class Estado {
     
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
     private String nome;
     private Cidade cidade;
@@ -20,8 +25,7 @@ public class Estado {
         
     }
 
-    public Estado(int id, String nome, Cidade cidade) {
-        this.id = id;
+    public Estado(String nome, Cidade cidade) {
         this.nome = nome;
         this.cidade = cidade;
     }

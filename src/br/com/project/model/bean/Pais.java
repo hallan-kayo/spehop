@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  *
@@ -11,22 +12,22 @@ import javax.persistence.Id;
  */
 
 @Entity
+@Table(name = "pais")
 public class Pais {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
     private String nome;
-//    private Estado estado;
+    private Estado estado;
     
     public Pais(){
         
     }
 
-    public Pais(int id, String nome, Estado estado) {
-        this.id = id;
+    public Pais(String nome, Estado estado) {
         this.nome = nome;
-//        this.estado = estado;
+        this.estado = estado;
     }
 
     public int getId() {
@@ -45,13 +46,12 @@ public class Pais {
         this.nome = nome;
     }
 
-//    public Estado getEstado() {
-//        return estado;
-//    }
-
-//    public void setEstado(Estado estado) {
-//        this.estado = estado;
-//    }
+    public Estado getEstado() {
+        return estado;
+    }
+    public void setEstado(Estado estado) {
+        this.estado = estado;
+    }
     
     
 }
