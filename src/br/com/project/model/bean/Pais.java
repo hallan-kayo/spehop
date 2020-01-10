@@ -1,5 +1,7 @@
 package br.com.project.model.bean;
 
+import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,19 +15,21 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "pais")
-public class Pais {
+public class Pais implements Serializable {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column
     private String nome;
-    private Estado estado;
+    @Column(name = "id_estado")
+    private int estado;
     
     public Pais(){
         
     }
 
-    public Pais(String nome, Estado estado) {
+    public Pais(String nome, int estado) {
         this.nome = nome;
         this.estado = estado;
     }
@@ -46,10 +50,10 @@ public class Pais {
         this.nome = nome;
     }
 
-    public Estado getEstado() {
+    public int getEstado() {
         return estado;
     }
-    public void setEstado(Estado estado) {
+    public void setEstado(int estado) {
         this.estado = estado;
     }
     

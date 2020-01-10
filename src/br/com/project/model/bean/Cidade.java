@@ -1,9 +1,12 @@
 package br.com.project.model.bean;
 
+import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
 /**
@@ -13,21 +16,23 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "cidade")
-public class Cidade {
+public class Cidade implements Serializable {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column
     private String nome;
-    private Endereco endereco;
+    @Column(name = "id_endereco")
+    private int idEndereco;
     
     public Cidade(){
         
     }
 
-    public Cidade(String nome, Endereco endereco) {
+    public Cidade(String nome, int idEndereco) {
         this.nome = nome;
-        this.endereco = endereco;
+        this.idEndereco = idEndereco;
     }
 
     public int getId() {
@@ -45,13 +50,13 @@ public class Cidade {
     public void setNome(String nome) {
         this.nome = nome;
     }
-
-    public Endereco getEndereco() {
-        return endereco;
+    @JoinColumn(name = "id_endereco")
+    public int getEndereco() {
+        return idEndereco;
     }
 
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
+    public void setEndereco(int idEndereco) {
+        this.idEndereco = idEndereco;
     }
     
     

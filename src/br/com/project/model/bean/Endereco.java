@@ -1,5 +1,7 @@
 package br.com.project.model.bean;
 
+import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,14 +15,18 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "endereco")
-public class Endereco {
+public class Endereco implements Serializable {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column
     private String rua;
+    @Column
     private int numero;
+    @Column
     private String bairro;
+    @Column
     private String cep;
 
     public Endereco(String rua, int numero, String bairro,String cep) {

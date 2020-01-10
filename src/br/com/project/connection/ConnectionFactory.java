@@ -15,7 +15,7 @@ import javax.persistence.Persistence;
  */
 public class ConnectionFactory {
     
-    private EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("spehop");
+    private final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("spehop");
     
     public EntityManager getConnection(){
         return entityManagerFactory.createEntityManager();

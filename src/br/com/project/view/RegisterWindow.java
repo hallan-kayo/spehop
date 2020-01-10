@@ -5,7 +5,6 @@
  */
 package br.com.project.view;
 
-import br.com.project.connection.ConnectionFactory;
 import br.com.project.model.bean.Cidade;
 import br.com.project.model.bean.Endereco;
 import br.com.project.model.bean.Estado;
@@ -20,13 +19,13 @@ import br.com.project.model.dao.PaisDAO;
 import br.com.project.model.dao.PessoaDAO;
 import br.com.project.model.dao.TelefoneDAO;
 import br.com.project.model.dao.UsuarioDAO;
+import br.com.project.model.dateFormat.FormatDate;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.persistence.EntityManager;
 import javax.swing.JOptionPane;
 
 /**
@@ -42,7 +41,7 @@ public class RegisterWindow extends javax.swing.JInternalFrame {
         initComponents();
     }
     
-    SimpleDateFormat dataFormat = new SimpleDateFormat("dd/MM/yyyy");
+    FormatDate formatDate = new FormatDate();
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -503,17 +502,15 @@ public class RegisterWindow extends javax.swing.JInternalFrame {
         String rg = rgTextField.getText();
 
         String dataNascimento = nascimentoTextField.getText();
-        DateFormat formatUS = new SimpleDateFormat("dd-MM-yyyy");
         Date date = null;
         try {
-            date = formatUS.parse(dataNascimento);
+            //formatando String para Date
+            date = formatDate.formatForDate(dataNascimento);
         } catch (ParseException ex) {
             Logger.getLogger(RegisterWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        //Depois formata data
-        DateFormat formatBR = new SimpleDateFormat("yyyy-MM-dd");
-        String dateFormated = formatBR.format(date);
+        //formatando para modelo americano
+        String dateFormated = formatDate.formatForAmericanModel(date);
 
         String cargo = officeBox.getSelectedItem().toString();
 
@@ -531,25 +528,19 @@ public class RegisterWindow extends javax.swing.JInternalFrame {
         String password = passwordTextField.getText();
         try {
             Telefone telefone = new Telefone(ddd,numeroTelefone);
+            new TelefoneDAO().save(telefone);
             Endereco endereco = new Endereco(rua,numeroCasa,bairro,cep);
-            Cidade cidade = new Cidade(nomeCidade,endereco);
-            Estado estado = new Estado(nomeEstado, cidade);
-            Pais pais = new Pais(nomePais, estado);
-            Pessoa pessoa = new  Pessoa(cpf, rg, name,dateFormated,cargo, susCard, endereco, telefone);
+            new EnderecoDAO().save(endereco);
+            Cidade cidade = new Cidade(nomeCidade,endereco.getId());
+            new CidadeDAO().save(cidade);
+            Estado estado = new Estado(nomeEstado, cidade.getId());
+            new EstadoDAO().save(estado);
+            Pais pais = new Pais(nomePais, estado.getId());
+            new PaisDAO().save(pais);
+            Pessoa pessoa = new  Pessoa(cpf, rg, name,dateFormated,cargo, susCard, endereco.getId(), telefone.getId());
+            new PessoaDAO().save(pessoa);
             Usuario usuario = new Usuario(pessoa.getId(),pessoa.getCpf(),password);
-
-            try {
-                new PessoaDAO().save(pessoa);
-                new TelefoneDAO().save(telefone);
-                new EnderecoDAO().save(endereco);
-                new CidadeDAO().save(cidade);
-                new EstadoDAO().save(estado);
-                new PaisDAO().save(pais);
-                new UsuarioDAO().save(usuario);  
-            } catch (Exception e) {
-                System.err.println(e);
-            }
-            
+            new UsuarioDAO().save(usuario); 
         }catch (Exception e) {
             JOptionPane.showMessageDialog(this, "dados inválidos");
         }

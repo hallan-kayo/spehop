@@ -1,6 +1,8 @@
 package br.com.project.model.bean;
 
+import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,27 +16,29 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "pessoa")
-public class Pessoa {
+public class Pessoa implements Serializable {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column
     private String cpf;
+    @Column
     private String rg;
+    @Column
     private String nome;
+    @Column
     private String dataNascimento;
+    @Column
     private String classificacao;
+    @Column
     private String cartaoSus;
-    @ManyToOne
-    private Endereco endereco;
-    @ManyToOne
-    private Telefone telefone;
-    
-    public Pessoa(){
-        
-    }
+    @Column(name = "id_endereco")
+    private int endereco;
+    @Column(name = "id_telefone")
+    private int telefone;
 
-    public Pessoa(String cpf, String rg, String nome, String dataNascimento, String classificacao, String cartaosus, Endereco endereco, Telefone telefone) {
+    public Pessoa(String cpf, String rg, String nome, String dataNascimento, String classificacao, String cartaosus, int endereco, int telefone) {
         this.cpf = cpf;
         this.rg = rg;
         this.nome = nome;
@@ -101,19 +105,19 @@ public class Pessoa {
         this.cartaoSus = cartaosus;
     }
 
-    public Endereco getEndereco() {
+    public int getEndereco() {
         return endereco;
     }
 
-    public void setEndereco(Endereco endereco) {
+    public void setEndereco(int endereco) {
         this.endereco = endereco;
     }
 
-    public Telefone getTelefone() {
+    public int getTelefone() {
         return telefone;
     }
 
-    public void setTelefone(Telefone telefone) {
+    public void setTelefone(int telefone) {
         this.telefone = telefone;
     }
     
